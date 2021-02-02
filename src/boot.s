@@ -52,6 +52,8 @@ maincore:
     str     xzr, [x5], #8
     sub     w6, w6, #1
     cbnz    w6, 3b
+
+    bl      clear_bss
  
     // jump to C code, should not return
 4:  bl      kernel_main
