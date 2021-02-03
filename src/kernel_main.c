@@ -1,22 +1,15 @@
-int clear_bss();
+extern char __bss_start[];
+extern char __bss_end[];
+extern char __bss_size[];
+void clear_bss() {
 
-void kernel_main() {
-
-	clear_bss();
-
-	while(1){
+	for (int i = 0; i < __bss_size; i++) {
+		__bss_start[i] = 0;
 	}
 }
+void kernel_main() {
 
-int clear_bss() {
-	char *begin_bss = &__bss_start;
-	char *end_bss = &__bss_end;
-	char *n = begin_bss;
-
-	while(n < end_bss) {
-		*n = 0;
-		n += 4;
+	while (1) {
+		;
 	}
-
-	return 0;
 }
