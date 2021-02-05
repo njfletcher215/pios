@@ -1,4 +1,5 @@
 set confirm off
+target remote localhost:1234
 file kernel8.elf
 break _start
 layout src
