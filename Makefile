@@ -48,6 +48,9 @@ debug:
 	i
 	qemu-system-aarch64 -machine raspi3 -kernel kernel8.img -hda rootfs.img -serial null -serial stdio -monitor none -nographic -k en-us
 
+run:
+	qemu-system-aarch64 -machine raspi3 -kernel kernel8.img -hda rootfs.img -serial null -serial stdio -monitor none -nographic -k en-us
+
 disassemble:
 	$(OBJDUMP) -D kernel8.elf
 
