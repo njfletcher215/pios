@@ -1,70 +1,45 @@
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <stdbool.h>
 #include "list.h"
 
+#ifndef	_NULL_
+#define NULL (void *)0
+#endif
 
-struct node *head = NULL;
-struct node *current = NULL;
+/*
+ * listAdd
+ *
+ * Adds newElement to a linked list pointed to by list. When calling this function, pass the address of list head.
+ *
+ */
+void listAdd(struct listElement **head, struct listElement *newElement){
+    struct listElement *iterator = (struct listElement*)head ;
 
-//display the list
-void printList() {
-   struct node *ptr = head;
-   printf("\n[ ");
-	
-   //start from the beginning
-   while(ptr != NULL) {
-      printf("(%d) ", ptr->data);
-      ptr = ptr->next;
-   }
-	
-   printf(" ]");
+    // Link element b into the list between iterator and iterator->next.
+    newElement->next = iterator->next ;
+    newElement->prev = iterator ;
+
+    iterator->next = newElement ;
+    
+    if(newElement->next != NULL){
+        newElement->next->prev = newElement ;
+    }
 }
 
-//insert link at the first location
-void insert(int data) {
-   //create a link
-   struct node *link = (struct node*) malloc(sizeof(struct node));
-	
-   link->data = data;
-	
-   //point it to old first node
-   link->next = head;
-	
-   //point first to new first node
-   head = link;
-}
 
-//delete first item
-struct node* delete() {
+/*
+ * listDelete
+ *
+ * Deletes an element from a doubly linked list.
+ */
+void listRemove(struct listElement *b)
+{
+	if(b->next != NULL)
+		b->next->prev = b->prev ;
 
-   //save reference to first link
-   struct node *tempLink = head;
-	
-   //mark next to first link as first 
-   head = head->next;
-	
-   //return the deleted link
-   return tempLink;
-}
+	if(b->prev != NULL)	
+		b->prev->next = b->next ;
 
-void main() {
-   insert(1);
-   insert(2);
-   insert(3);
-   insert(4);
-   insert(5);
-
-   printf("Original List: "); 
-	
-   //print list
-   printList();
-
-   delete();
-   delete();
-   delete();
-	
-   printf("\nList after deleting 3 items: ");
-   printList();
+	// NULLify the element's next and prev pointers to indicate
+	// that it is not linked into a list.
+	b->next = NULL ;
+	b->prev = NULL ;
 }
