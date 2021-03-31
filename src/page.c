@@ -1,5 +1,5 @@
 #include "page.h"
-#include "list.c"
+#include "list.h"
 #define NPAGES 128
 #define PAGE_SIZE 0x200000
 #define NULL (void *)0

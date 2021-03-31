@@ -1,11 +1,12 @@
-#include "rprintf.c"
-#include "serial.c"
+#include "rprintf.h"
+#include "serial.h"
+#include "hexdump.h"
 
 void hexdump(char *start, unsigned int length) {
 	char *end = start + length;
 	char *current = start;
 	while (current < end) {
-		esp_printf(putc, "%p  ", current);	// print the starting address for this line
+		esp_printf(putc, "%p ", current);	// print the starting address for this line
 		char chars[17] = { 0 };
 		// iterate through each char in the next 16 and print the hex value, add the char value to an array
 		for (int i = 0; i < 16; i++) {

@@ -15,6 +15,17 @@ SDIR = src
 OBJS = \
 	boot.o \
 	kernel_main.o \
+	gpio.o \
+	page.o \
+	serial.o \
+	fat.o \
+	list.o \
+	sd.o \
+	hexdump.o \
+	rprintf.o \
+	strcomparor.o \
+	delays.o \
+
 
 
 
